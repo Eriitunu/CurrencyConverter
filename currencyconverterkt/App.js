@@ -17,7 +17,7 @@ export default class App extends React.Component {
 
         <View style={viewStyles.currencyBlockBackground}>
           <GenericCurrencyField currencyDescription='NGN'/>
-          <GenericCurrencyField currencyDouble='GB'/>
+          
         </View>
 
       </View>

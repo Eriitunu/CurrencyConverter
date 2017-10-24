@@ -16,6 +16,7 @@ class GenericCurrencyField extends Component {
       <View style={viewStyles.container}>
 
         <View style={viewStyles.amountFieldArea}>
+        <Image source={require('../images/Nigeria.png') } resizeMode={'cover'} style={viewStyles.flagIcon} />
           <Text style={textStyles.displayAmountNumber}>0</Text>
         </View>
 
@@ -55,6 +56,11 @@ const viewStyles = {
       alignItems: 'center',
       justifyContent: 'center',
       flex: 2.5,
+    },
+
+    flagIcon: {
+      width: 38,
+      height: 38,
     }
 
 };
@@ -68,12 +74,7 @@ const textStyles = {
       fontSize: 30,
       color: 'white',
     },
-    currencyDouble: {
-      fontSize: 30,
-      fontWeight: '500',
 
-
-    }
 
 
 };
