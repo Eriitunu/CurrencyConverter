@@ -26,7 +26,10 @@ export default class App extends React.Component {
             flagIcon={require('./src/images/uk.png') }
             displayAmountNumber={0}
           />
-
+          <View style={viewStyles.rateDetail}>
+            <Text style= {textStyles.currencyDescription}> 1 NGN = 0.021 GBP</Text>
+            <Text style= {textStyles.currencyDescription}> 1 GBP = 465.8221 NGN</Text>
+          </View>
         </View>
 
       </View>
@@ -55,6 +58,10 @@ const viewStyles = {
     backgroundColor: '#252525',
     width: '100%',
     height: '30%',
+  },
+  rateDetail:{
+    flex: 1.5,
+    alignItems: 'center',
   }
 
 };
@@ -62,7 +69,12 @@ const viewStyles = {
 
 const textStyles = {
   header:{
-    fontSize: 17        ,
+    fontSize: 17,
     fontWeight: 'bold',
+  },
+  currencyDescription: {
+    fontSize: 17,
+    color: 'white',
+    margin: 5,
   }
 };

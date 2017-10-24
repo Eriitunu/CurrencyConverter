@@ -38,7 +38,7 @@ const viewStyles = {
     container: {
       backgroundColor: 'lightblue',
       width: '100%',
-      height: 80,
+      flex:  2,
       flexDirection: 'row',
       marginBottom: 3,
     },
