@@ -1,9 +1,14 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import GenericCurrencyField from './src/components/GenericCurrencyField';
+import RoundButton from './src/components/RoundButton';
 
- 
 export default class App extends React.Component {
+
+
+  buttonPressed = ( text, isDeleteButton) => {
+    console.log("The button pressed was = " + text);
+  }
 
 
   render() {
@@ -16,6 +21,7 @@ export default class App extends React.Component {
         </View>
 
         <View style={viewStyles.currencyBlockBackground}>
+
           <GenericCurrencyField
             currencyDescription='NGN'
             flagIcon={require('./src/images/Nigeria.png') }
@@ -26,11 +32,21 @@ export default class App extends React.Component {
             flagIcon={require('./src/images/uk.png') }
             displayAmountNumber={0}
           />
+
           <View style={viewStyles.rateDetail}>
             <Text style= {textStyles.currencyDescription}> 1 NGN = 0.021 GBP</Text>
             <Text style= {textStyles.currencyDescription}> 1 GBP = 465.8221 NGN</Text>
           </View>
+
         </View>
+
+        <View style = {viewStyles.keypad}>
+          <RoundButton
+            number = {'1'}
+            buttonPressed = {(text, isDeleteButton) => this.buttonPressed(text, isDeleteButton)}
+           />
+        </View>
+
 
       </View>
     );
@@ -62,6 +78,13 @@ const viewStyles = {
   rateDetail:{
     flex: 1.5,
     alignItems: 'center',
+  },
+  keypad: {
+    flexDirection : 'row',
+    flexWrap: 'wrap',
+    padding: 25,
+    width: '100%',
+    height: '60%',
   }
 
 };
