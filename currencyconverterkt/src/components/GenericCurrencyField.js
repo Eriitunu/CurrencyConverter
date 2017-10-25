@@ -36,7 +36,7 @@ class GenericCurrencyField extends Component {
 const viewStyles = {
 
     container: {
-      backgroundColor: 'lightblue',
+      backgroundColor: 'red',
       width: '100%',
       flex:  2,
       flexDirection: 'row',

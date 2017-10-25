@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import GenericCurrencyField from './src/components/GenericCurrencyField';
 
-
+ 
 export default class App extends React.Component {
 
 
