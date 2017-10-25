@@ -2,6 +2,8 @@
 import React, {Component} from 'react';
 import {Text, Image, TouchableHighlight, View} from 'react-native';
 
+const amountSize = 30;
+
 class GenericCurrencyField extends Component {
 
   constructor(props){
@@ -12,21 +14,30 @@ class GenericCurrencyField extends Component {
   // render has to be invoked if the component is to be drawn on the screen.
   render(){
 
+    let amountStyle = (this.props.isHighlighted)  ? textStyles.highlightedAmountNumber : textStyles.displayAmountNumber;
+
     return (
+
+    <TouchableHighlight
+      activeOpacity={0.95}
+      underlayColor={'transparent'}
+      onPress={this.props.fieldTapped.bind(this, this.props.fieldIndex)}
+      style={viewStyles.container}
+    >
       <View style={viewStyles.container}>
 
         <View style={viewStyles.amountFieldArea}>
-        <Image source={this.props.flagIcon} resizeMode={'cover'} style={viewStyles.flagIcon} />
-          <Text style={textStyles.displayAmountNumber}>{this.props.displayAmountNumber}</Text>
+          <Image source={this.props.flagIcon} resizeMode={'cover'} style={viewStyles.flagIcon} />
+          <Text style={amountStyle}>{this.props.displayAmountNumber}</Text>
         </View>
 
         <View style={viewStyles.currencyDescriptionField}>
-          <Text style ={textStyles.currencyDescription}>{this.props.currencyDescription}</Text>
+          <Text style={textStyles.currencyDescription}>{this.props.currencyDescription}</Text>
 
         </View>
 
       </View>
-
+</TouchableHighlight>
     );
 
   }
@@ -36,11 +47,11 @@ class GenericCurrencyField extends Component {
 const viewStyles = {
 
     container: {
-      backgroundColor: 'red',
+      backgroundColor: 'grey',
       width: '100%',
       flex:  2,
       flexDirection: 'row',
-      marginBottom: 3,
+      marginBottom: 1.5,
     },
 
     amountFieldArea: {
@@ -72,12 +83,16 @@ const textStyles = {
       fontWeight: '500',
     },
     displayAmountNumber: {
-      fontSize: 30,
-      color: 'white',
+      fontSize: amountSize,
+      color: 'white'
     },
 
+    highlightedAmountNumber: {
+      fontSize: amountSize,
+      color: '#F6A523'
 
 
+    }
 };
 
 // this line of code allows the class to be accesible in other parts of the app (in other files/ classes)

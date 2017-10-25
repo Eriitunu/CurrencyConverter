@@ -13,11 +13,37 @@ export default class App extends React.Component {
     super(props);
 
     this.buttonArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9',  '.', '0',  'DEL'];
+
+    // initialising the state of the component
+    this.state = {
+      currency1isHighlighted: true,
+      currency2isHighlighted: false
+    }
   }
 
   buttonPressed = ( text, isDeleteButton) => {
     console.log("The button pressed was = " + text + " & delete is " + isDeleteButton  );
   }
+
+
+  fieldTapped = (fieldIndex) =>{
+
+    let FIELD_ONE = 0;
+
+    //IF THE FIELD TAPPED ON IS FIELD
+    if(fieldIndex == FIELD_ONE){
+      this.setState({
+        currency1isHighlighted: true, currency2isHighlighted: false
+      });
+    }
+
+    else{
+      this.setState({
+        currency1isHighlighted: false, currency2isHighlighted: true
+      });
+    }
+  }
+
 
 
   render() {
@@ -35,11 +61,19 @@ export default class App extends React.Component {
             currencyDescription='NGN'
             flagIcon={require('./src/images/Nigeria.png') }
             displayAmountNumber={0}
+            fieldIndex={0}
+            fieldTapped={(index)  => this.fieldTapped(index)}
+            isHighlighted={this.state.currency1isHighlighted}
           />
+
+
           <GenericCurrencyField
             currencyDescription='GBP'
             flagIcon={require('./src/images/uk.png') }
             displayAmountNumber={0}
+            fieldIndex={1}
+            fieldTapped={(index)=> this.fieldTapped(index)}
+            isHighlighted={this.state.currency2isHighlighted}
           />
 
           <View style={viewStyles.rateDetail}>
