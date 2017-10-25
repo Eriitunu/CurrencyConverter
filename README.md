@@ -1,2 +1,2 @@
 Creating my Readme file.
-# CurrencyConverte
+# CurrencyConverter
