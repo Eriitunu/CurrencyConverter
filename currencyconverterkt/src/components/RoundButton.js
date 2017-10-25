@@ -55,7 +55,8 @@ const viewStyles = {
 const textStyles = {
   numberStyle : {
     color : 'white',
-    fontSize : 20,
+    fontSize : 28,
+    fontWeight: 'bold'
 
 
   }
