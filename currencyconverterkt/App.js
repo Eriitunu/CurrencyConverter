@@ -3,6 +3,8 @@ import { Text, View } from 'react-native';
 import GenericCurrencyField from './src/components/GenericCurrencyField';
 import RoundButton from './src/components/RoundButton';
 
+const buttonMargin = {horizontal: 65, vertical: 35}
+
 export default class App extends React.Component {
 
 
@@ -10,11 +12,11 @@ export default class App extends React.Component {
 
     super(props);
 
-    this.buttonArray = ['1', '2', '3', '4', '5', '6', '7', '7', '8', '9', '0', '.', 'DEL'];
+    this.buttonArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9',  '.', '0',  'DEL'];
   }
 
   buttonPressed = ( text, isDeleteButton) => {
-    console.log("The button pressed was = " + text);
+    console.log("The button pressed was = " + text + " & delete is " + isDeleteButton  );
   }
 
 
@@ -50,16 +52,39 @@ export default class App extends React.Component {
         <View style = {viewStyles.keypad}>
           {
             this.buttonArray.map((data, index)  => {
-              return (
-                <RoundButton
-                key={index}
-                  number={data}
-                  isDeleteButton={false}
-                  buttonPressed={(text, isDeleteButton) => this.buttonPressed(text, isDeleteButton)}
-                />
+                if (data == 'DEL'){
+                  return(
+                    <RoundButton
+                    key={index}
+                    number={data}
+                    isDeleteButton={true}
+                    buttonPressed={(text, isDeleteButton) => this.buttonPressed(text, isDeleteButton)}
+                    marginStyling={{ marginBottom: buttonMargin.vertical}}
+                    />
+                  );
+                }
+                else if ((index + 1)% 3 == 0) {
+                  return (
+                    <RoundButton
+                    key={index}
+                    number={data}
+                    buttonPressed={(text, isDeleteButton) => this.buttonPressed(text, isDeleteButton)}
+                    marginStyling={{ marginBottom: buttonMargin.vertical}}
+                    />
+                  );
 
-              )
-
+                }
+                else{
+                  return(
+                    <RoundButton
+                      key={index}
+                      number={data}
+                      isDeleteButton={false}
+                      buttonPressed={(text, isDeleteButton) => this.buttonPressed(text, isDeleteButton)}
+                      marginStyling={{marginRight: buttonMargin.horizontal, marginBottom: buttonMargin.vertical}}
+                    />
+                  );
+                }
             })
           }
 
@@ -75,7 +100,7 @@ export default class App extends React.Component {
 const viewStyles = {
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingTop: 15,

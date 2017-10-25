@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {Text , View, TouchableHighlight} from 'react-native';
 
 const buttonBackgroundColor = {
-   main: 'black',
-   border:'blue'
+   main: '#252525',
+   border:'orange'
 };
 
 const buttonDimensions = {
-  height: 60,
-  width: 60
+  height: 65,
+  width: 65
 };
 
 class RoundButton extends Component {
