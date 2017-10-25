@@ -4,7 +4,7 @@ import GenericCurrencyField from './src/components/GenericCurrencyField';
 import RoundButton from './src/components/RoundButton';
 import Currency from './src/Model/Currency';
 import CurrencyFactory from './src/Model/CurrencyFactory';
-
+import ButtonPressManager from './src/Model/ButtonPressManager';
 const buttonMargin = {horizontal: 65, vertical: 35}
 
 export default class App extends React.Component {
@@ -21,29 +21,42 @@ export default class App extends React.Component {
 
       currency1: CurrencyFactory.createCurrencyWidthIdentifier(Currency.currencyList.nigeria),
       currency2: CurrencyFactory.createCurrencyWidthIdentifier(Currency.currencyList.britain),
-
       currency1isHighlighted: true,
-      currency2isHighlighted: false
+      currency2isHighlighted: false,
+      lastPressedButtonValue: ''
     }
+    this.currentlySelectedCurrecncy = this.state.currency1;
+    this.alternateCurrency = this.state.currency2;
   }
 
   buttonPressed = ( text, isDeleteButton) => {
     console.log("The button pressed was = " + text + " & delete is " + isDeleteButton  );
-  }
+    /*when button is pressed we want to do 2 things
+    1. Depending on what currencyField is selected (get the c)*/
+    let resultingStringAfterButtonPress = ButtonPressManager.numberPressed(this.currentlySelectedCurrecncy.currencyStringDisplayValue, text, isDeleteButton, this.state.lastPressedButtonValue);
+    let alternateCurrencyCalculation = parseFloat(resultingStringAfterButtonPress).toFixed(2) * this.currentlySelectedCurrecncy.exchangeRateForAlternateCurrency(this.alternateCurrency);
 
+    this.currentlySelectedCurrecncy.currencyStringDisplayValue = resultingStringAfterButtonPress;
+    this.alternateCurrency.currencyStringDisplayValue = alternateCurrencyCalculation.toFixed(2).toString();
 
+    this.setState({ currency1: this.state.currency1, currency2: this.state.currency2, lastPressedButtonValue: text});
+}
   fieldTapped = (fieldIndex) =>{
 
     let FIELD_ONE = 0;
 
-    //IF THE FIELD TAPPED ON IS FIELD
+    //IF THE FIELD TAPPED ON IS FIELD ONE
     if(fieldIndex == FIELD_ONE){
+      this.currentlySelectedCurrecncy = this.state.currency1;
+      this.alternateCurrency = this.state.currency2;
       this.setState({
         currency1isHighlighted: true, currency2isHighlighted: false
       });
     }
 
     else{
+      this.currentlySelectedCurrecncy = this.state.currency2;
+      this.alternateCurrency = this.state.currency1;
       this.setState({
         currency1isHighlighted: false, currency2isHighlighted: true
       });
