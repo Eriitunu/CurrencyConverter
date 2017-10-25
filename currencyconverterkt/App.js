@@ -2,6 +2,8 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import GenericCurrencyField from './src/components/GenericCurrencyField';
 import RoundButton from './src/components/RoundButton';
+import Currency from './src/Model/Currency';
+import CurrencyFactory from './src/Model/CurrencyFactory';
 
 const buttonMargin = {horizontal: 65, vertical: 35}
 
@@ -16,6 +18,10 @@ export default class App extends React.Component {
 
     // initialising the state of the component
     this.state = {
+
+      currency1: CurrencyFactory.createCurrencyWidthIdentifier(Currency.currencyList.nigeria),
+      currency2: CurrencyFactory.createCurrencyWidthIdentifier(Currency.currencyList.britain),
+
       currency1isHighlighted: true,
       currency2isHighlighted: false
     }
@@ -47,6 +53,11 @@ export default class App extends React.Component {
 
 
   render() {
+
+let currency1Description = this.state.currency1.exchangeRateDetail(this.state.currency2);
+
+let currency2Description = this.state.currency2.exchangeRateDetail(this.state.currency1);
+
     return (
       <View style={viewStyles.container}>
 
@@ -58,9 +69,9 @@ export default class App extends React.Component {
         <View style={viewStyles.currencyBlockBackground}>
 
           <GenericCurrencyField
-            currencyDescription='NGN'
+            currencyDescription={this.state.currency1.shorthand}
             flagIcon={require('./src/images/Nigeria.png') }
-            displayAmountNumber={0}
+            displayAmountNumber={this.state.currency1.currencyStringDisplayValue}
             fieldIndex={0}
             fieldTapped={(index)  => this.fieldTapped(index)}
             isHighlighted={this.state.currency1isHighlighted}
@@ -68,17 +79,17 @@ export default class App extends React.Component {
 
 
           <GenericCurrencyField
-            currencyDescription='GBP'
+            currencyDescription={this.state.currency2.shorthand}
             flagIcon={require('./src/images/uk.png') }
-            displayAmountNumber={0}
+            displayAmountNumber={this.state.currency2.currencyStringDisplayValue}
             fieldIndex={1}
             fieldTapped={(index)=> this.fieldTapped(index)}
             isHighlighted={this.state.currency2isHighlighted}
           />
 
           <View style={viewStyles.rateDetail}>
-            <Text style= {textStyles.currencyDescription}> 1 NGN = 0.021 GBP</Text>
-            <Text style= {textStyles.currencyDescription}> 1 GBP = 465.8221 NGN</Text>
+            <Text style= {textStyles.currencyDescription}> {currency1Description}</Text>
+            <Text style= {textStyles.currencyDescription}> {currency2Description}</Text>
           </View>
 
         </View>
